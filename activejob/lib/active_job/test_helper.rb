@@ -57,11 +57,11 @@ module ActiveJob
     # <tt>ActiveJob::QueueAdapters::TestAdapter</tt>.
     #
     # Note: The adapter provided by this method must provide some additional
-    # methods from those expected of a standard <tt>ActiveJob::QueueAdapter</tt>
-    # in order to be used with the active job test helpers. Refer to
-    # <tt>ActiveJob::QueueAdapters::TestAdapter</tt>.
+    # methods (eg: enqueued_jobs, performed_jobs) from those expected of a
+    # standard <tt>ActiveJob::QueueAdapter</tt> in order to be used with the
+    # active job test helpers. Refer to <tt>ActiveJob::QueueAdapters::TestAdapter</tt>.
     def queue_adapter_for_test
-      ActiveJob::QueueAdapters::TestAdapter.new
+      Rails.application.config.active_job.queue_adapter || ActiveJob::QueueAdapters::TestAdapter
     end
 
     # Asserts that the number of enqueued jobs matches the given number.
